@@ -25,6 +25,16 @@ class Autocomplete extends Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.instance) {
+      const { data } = this.props.options;
+
+      if (JSON.stringify(prevProps.options.data) !== JSON.stringify(data)) {
+        this.instance.updateData(data);
+      }
+    }
+  }
+
   componentWillUnmount() {
     if (this.instance) {
       this.instance.destroy();
